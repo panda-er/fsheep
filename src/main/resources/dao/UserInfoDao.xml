@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minip.tx.dao.UserInfoDao">
+    <select id="getUserInfoByOpenId" parameterType="java.lang.String" resultType="com.minip.tx.dao.bean.UserInfo">
+        select open_id as openId,
+        avatar_url as avatarUrl,
+        nickname,
+        level
+        from user_info where open_id = #{openId}
+    </select>
+
+    <insert id="register" parameterType="com.minip.tx.dao.bean.UserInfo">
+        insert into user_info(open_id, avatar_url, nickname, level, create_time, update_time)
+        values(#{userInfo.openId}, #{userInfo.avatarUrl}, #{userInfo.nickname}, #{userInfo.level},
+         #{userInfo.createTime}, #{userInfo.updateTime})
+    </insert>
+
+    <select id="checkExist" parameterType="java.lang.String" resultType="com.minip.tx.dao.bean.UserInfo">
+        select open_id as openId,
+        avatar_url as avatarUrl,
+        nickname as nickname,
+        level as level,
+        create_time as createTime,
+        update_time as updateTime
+        from user_info where open_id = #{openId} limit 1
+    </select>
+
+    <update id="updatePhotoAndNickname" parameterType="com.minip.tx.dao.bean.UserInfo">
+        update user_info
+        set avatar_url = #{userInfo.avatarUrl},
+        nickname = #{userInfo.nickname}
+        where open_id = #{userInfo.openId}
+    </update>
+
+</mapper>

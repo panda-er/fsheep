@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minip.tx.dao.AccountInfoDao">
+    <select id="getUserAccountByOpenId" parameterType="java.lang.String" resultType="com.minip.tx.dao.bean.AccountInfo">
+        select account_balance as accountBalance,
+        withdraw_cash as withdrawCash
+        from account_info where open_id = #{openId}
+    </select>
+
+    <select id="queryAccountNum" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select account_balance from account_info where open_id = #{openId}
+    </select>
+    
+    <update id="updateAccountNumByUser">
+        update account_info
+        set account_balance = #{accountNum}
+        where open_id = #{openId}
+    </update>
+
+    <update id="increAccountNumByUser">
+        update account_info
+        set account_balance = account_balance + #{bonus}
+        where open_id = #{openId}
+    </update>
+    
+    <insert id="addAccountInfo" parameterType="com.minip.tx.dao.bean.AccountInfoVo">
+        insert into account_info(open_id, account_balance, withdraw_cash, create_time, update_time)
+        values(#{accountInfoVo.openId}, #{accountInfoVo.accountBalance}, #{accountInfoVo.withdrawCash},
+         #{accountInfoVo.createTime}, #{accountInfoVo.updateTime})
+    </insert>
+
+</mapper>

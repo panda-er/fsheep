@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minip.tx.dao.SportInfoDao">
+    <select id="getSportInfoListByUser" parameterType="java.lang.String" resultType="com.minip.tx.dao.bean.SportInfo">
+        select day,
+        status,
+        steps_submit as stepsSubmit,
+        output,
+        red_packet as redPacket
+        from everyday_sport_info where open_id = #{openId} order by day desc
+    </select>
+
+    <insert id="addSportInfo" parameterType="com.minip.tx.dao.bean.SportInfoVo">
+        insert into everyday_sport_info(day, open_id, output, status)
+        values(#{sportInfoVo.day}, #{sportInfoVo.openId}, #{sportInfoVo.output}, #{sportInfoVo.status})
+    </insert>
+
+    <update id="submitSport" parameterType="com.minip.tx.dao.bean.SportInfoVo">
+        update everyday_sport_info
+        set steps_submit = #{sportInfoVo.stepsSubmit},
+        status = #{sportInfoVo.status},
+        time_submit = #{sportInfoVo.timeSubmit}
+        where day = #{sportInfoVo.day} and open_id = #{sportInfoVo.openId}
+    </update>
+
+    <select id="getSportInfo" resultType="com.minip.tx.dao.bean.SportInfo">
+        select status,
+        steps_submit as stepsSubmit,
+        output,
+        red_packet as redPacket,
+        time_submit as timeSubmit
+        from everyday_sport_info where open_id = #{openId} and day = #{day}
+    </select>
+    
+    <update id="accountSport">
+        update everyday_sport_info
+        set status = 3,
+        red_packet = #{bonus}
+        where open_id = #{openId} and day = #{day}
+    </update>
+
+
+
+</mapper>

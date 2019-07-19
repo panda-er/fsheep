@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minip.tx.dao.AccountAlterInfoDao">
+    <select id="getAlterInfoList" parameterType="java.lang.String" resultType="com.minip.tx.dao.bean.AccountAlteration">
+        select alter_money as alterMoney,
+        alter_type as alterType,
+        alter_time as alterTime
+        from account_alter_info where open_id = #{openId} order by alter_time desc
+    </select>
+
+    <insert id="addAlterInfo" parameterType="com.minip.tx.dao.bean.AccountAlterationVo">
+        insert into account_alter_info(open_id, alter_money, alter_type, alter_time)
+        values(#{accountAlterationVo.openId}, #{accountAlterationVo.alterMoney}, #{accountAlterationVo.alterType}, #{accountAlterationVo.alterTime})
+    </insert>
+
+
+</mapper>

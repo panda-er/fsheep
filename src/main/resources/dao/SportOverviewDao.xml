@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minip.tx.dao.SportOverviewDao">
+    <select id="getOverviewByUser" parameterType="java.lang.String" resultType="com.minip.tx.dao.bean.SportOverviewInfo">
+        select join_days as joinDays,
+        victory_days as victoryDays
+        from sport_overview_info where open_id = #{openId}
+    </select>
+
+    <update id="increJoinDays">
+        update sport_overview_info
+        set join_days = join_days + 1
+        where open_id = #{openId}
+    </update>
+
+    <update id="increVicDays">
+        update sport_overview_info
+        set victory_days = victory_days + 1
+        where open_id = #{openId}
+    </update>
+
+    <insert id="addSportOverviewInfo" parameterType="com.minip.tx.dao.bean.SportOverviewInfo">
+        insert into sport_overview_info(open_id, join_days, victory_days, create_time, update_time)
+        values(#{sportOverviewInfo.openId}, #{sportOverviewInfo.joinDays},
+        #{sportOverviewInfo.victoryDays}, #{sportOverviewInfo.createTime}, #{sportOverviewInfo.updateTime})
+    </insert>
+
+
+</mapper>
