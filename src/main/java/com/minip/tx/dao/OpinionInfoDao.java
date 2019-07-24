@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface OpinionInfoDao {
-    public int addOpinion(@Param("opinionInfo")OpinionInfo opinionInfo);
+    int addOpinion(@Param("opinionInfo")OpinionInfo opinionInfo);
 }

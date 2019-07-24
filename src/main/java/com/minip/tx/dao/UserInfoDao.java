@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface UserInfoDao {
-    public UserInfo getUserInfoByOpenId(@Param("openId")String openId);
-    public int register(@Param("userInfo")UserInfo userInfo);
-    public UserInfo checkExist(@Param("openId")String openId);
-    public int updatePhotoAndNickname(@Param("userInfo")UserInfo userInfo);
+    UserInfo getUserInfoByOpenId(@Param("openId")String openId);
+    int register(@Param("userInfo")UserInfo userInfo);
+    UserInfo checkExist(@Param("openId")String openId);
+    int updatePhotoAndNickname(@Param("userInfo")UserInfo userInfo);
 }

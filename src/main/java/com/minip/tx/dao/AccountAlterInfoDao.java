@@ -11,6 +11,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface AccountAlterInfoDao {
-    public List<AccountAlteration> getAlterInfoList(@Param("openId") String openId);
-    public int addAlterInfo(@Param("accountAlterationVo")AccountAlterationVo accountAlterationVo);
+    List<AccountAlteration> getAlterInfoList(@Param("openId") String openId);
+    int addAlterInfo(@Param("accountAlterationVo")AccountAlterationVo accountAlterationVo);
 }

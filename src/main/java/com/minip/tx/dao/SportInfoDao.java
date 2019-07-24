@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 @Mapper
 public interface SportInfoDao {
-    public List<SportInfo> getSportInfoListByUser(@Param("openId") String openId);
-    public int addSportInfo(@Param("sportInfoVo")SportInfoVo sportInfoVo);
-    public int submitSport(@Param("sportInfoVo")SportInfoVo sportInfoVo);
-    public SportInfo getSportInfo(@Param("openId")String openId, @Param("day")String day);
-    public int accountSport(@Param("openId")String openId, @Param("day")String day, @Param("bonus")BigDecimal bonus);
+    List<SportInfo> getSportInfoListByUser(@Param("openId") String openId);
+    int addSportInfo(@Param("sportInfoVo")SportInfoVo sportInfoVo);
+    int submitSport(@Param("sportInfoVo")SportInfoVo sportInfoVo);
+    SportInfo getSportInfo(@Param("openId")String openId, @Param("day")String day);
+    int accountSport(@Param("openId")String openId, @Param("day")String day, @Param("bonus")BigDecimal bonus);
 }

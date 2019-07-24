@@ -3,5 +3,5 @@ package com.minip.tx.service;
 import com.minip.tx.utils.Result;
 
 public interface SportInfoService {
-    public Result getSportListByUser(String openId, int pageNow, int pageSize);
+    Result getSportListByUser(String openId, int pageNow, int pageSize);
 }

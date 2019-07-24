@@ -34,7 +34,7 @@ public class AccountAlterServiceImpl implements AccountAlterService {
             return Result.error(ErrorTypeEnum.DB_OPERATION_FAILED);
         }
         logger.info("-- Succeed to get account alterationInfo List --");
-        PageInfo pageInfo = new PageInfo<AccountAlteration>(accountAlterations);
+        PageInfo pageInfo = new PageInfo(accountAlterations);
         return Result.ok(pageInfo);
     }
 }

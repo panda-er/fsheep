@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 @Mapper
 @Repository
 public interface SportOverviewDao {
-    public SportOverviewInfo getOverviewByUser(@Param("openId")String openId);
-    public int increJoinDays(@Param("openId")String openId);
-    public int increVicDays(@Param("openId")String openId);
-    public int addSportOverviewInfo(@Param("sportOverviewInfo")SportOverviewInfo sportOverviewInfo);
+    SportOverviewInfo getOverviewByUser(@Param("openId")String openId);
+    int increJoinDays(@Param("openId")String openId);
+    int increVicDays(@Param("openId")String openId);
+    int addSportOverviewInfo(@Param("sportOverviewInfo")SportOverviewInfo sportOverviewInfo);
 }
