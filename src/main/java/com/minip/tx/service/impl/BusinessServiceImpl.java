@@ -28,11 +28,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.minip.tx.common.constant.TOMORROW;
+import static com.minip.tx.common.constant.TWO_YUAN;
+import static com.minip.tx.common.constant.YESTERDAY;
+
 
 @Service
 public class BusinessServiceImpl implements BusinessService {
     private final static Logger logger = LoggerFactory.getLogger(BusinessServiceImpl.class);
-    private final static BigDecimal TWO_YUAN = new BigDecimal(2.00);
 
     @Autowired
     private UserInfoDao userInfoDao;
@@ -205,7 +208,7 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public void initBonusPool() {
         //0点初始化明日奖金池
-        String day = TimeUtils.getDay(TimeUtils.TOMORROW);
+        String day = TimeUtils.getDay(TOMORROW);
         String bonusKey = KeyGenerator.bonusByDay(day);
         try{
             stringRedisTemplate.opsForValue().set(bonusKey, "0");
@@ -253,7 +256,7 @@ public class BusinessServiceImpl implements BusinessService {
     @Transactional
     public Result transToDatabase() {
         //获取昨天的日期
-        String yesterday = TimeUtils.getDay(TimeUtils.YESTERDAY);
+        String yesterday = TimeUtils.getDay(YESTERDAY);
         //获取bonus-key
         String bonusKey = KeyGenerator.bonusByDay(yesterday);
         //获取昨日奖金池金额

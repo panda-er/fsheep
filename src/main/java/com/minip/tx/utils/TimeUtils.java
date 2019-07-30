@@ -1,23 +1,39 @@
 package com.minip.tx.utils;
 
+import com.mchange.util.AssertException;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
+import static com.minip.tx.common.constant.TODAY;
+import static com.minip.tx.common.constant.TOMORROW;
+import static com.minip.tx.common.constant.YESTERDAY;
 
 public class TimeUtils {
-    public final static String TODAY = "today";
-    public final static String YESTERDAY = "yesterday";
-    public final static String TOMORROW = "tomorrow";
+
+    private static SimpleDateFormat yyyy_MM_dd;
+
+    //避免每次调用方法重复创建SimpleDateFormat对象
+    static{
+        yyyy_MM_dd = new SimpleDateFormat("yyyy-MM-dd");
+    }
+
+    // 工具类 拒绝实例化
+    private TimeUtils(){
+        throw new AssertException();
+    }
+
+
     public static Timestamp getCurrentTimeStamp()
     {
         return new Timestamp(System.currentTimeMillis());
     }
 
     public static String getDay(String dayType){
-        Date date=new Date();//取时间
-        Calendar calendar = new GregorianCalendar();
+        Date date= new Date();//取时间
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         int amount = 0;
         switch(dayType){
@@ -33,23 +49,13 @@ public class TimeUtils {
                 return null;
         }
         calendar.add(calendar.DATE, amount);//把日期往后增加一天.整数往后推,负数往前移动
-        date=calendar.getTime(); //这个时间就是日期往后推一天的结果
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = formatter.format(date);
+        date = calendar.getTime(); //这个时间就是日期往后推一天的结果
+        String dateString = yyyy_MM_dd.format(date);
         return dateString;
     }
 
     public static String transDay(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String strDay = sdf.format(date);
+        String strDay = yyyy_MM_dd.format(date);
         return strDay;
     }
-
-    public static String transDayTime(Timestamp ts){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String strDayTime = sdf.format(ts);
-        return strDayTime;
-    }
-
-
 }

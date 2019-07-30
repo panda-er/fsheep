@@ -1,10 +1,8 @@
 package com.minip.tx.utils;
 
+import static com.minip.tx.common.constant.*;
+
 public class KeyGenerator {
-    private final static String BONUS_POOL = "bonus_pool:";
-    private final static String ACHIEVE_SET = "achieve_set:";
-    private final static String SPORT_STATUS = "sport_status:";
-    private final static String MAOHAO = ":";
 
     public static String bonusByDay(String day){
         return BONUS_POOL + day;
